@@ -43,8 +43,8 @@
             to { opacity: 1; }
         }
         
-        /* Flying image */
-        #flying-image {
+        /* Flying images */
+        #flying-image, #flying-image-2 {
             position: absolute;
             width: 150px;
             height: auto;
@@ -53,8 +53,12 @@
             transition: filter 0.1s;
         }
         
-        /* Rainbow border for image */
-        #flying-image:hover {
+        #flying-image-2 {
+            filter: drop-shadow(0 0 10px #00ff00) drop-shadow(0 0 20px #ffff00);
+        }
+        
+        /* Rainbow border for images */
+        #flying-image:hover, #flying-image-2:hover {
             filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 30px #ffff00);
         }
         
@@ -255,8 +259,9 @@
     <div class="light-border left" id="lights-left"></div>
     <div class="light-border right" id="lights-right"></div>
     
-    <!-- Flying image -->
-    <img src="cora.png" alt="Flying image!" id="flying-image">
+    <!-- Flying images -->
+    <img src="cora.png" alt="Flying Cora!" id="flying-image">
+    <img src="holly.png" alt="Flying Holly!" id="flying-image-2">
     
     <!-- Header -->
     <div class="header-container">
@@ -272,7 +277,7 @@
     
     <!-- Email -->
     <div class="email">
-        <a href="#">📧 EMAIL ME!! 📧</a>
+        <a href="mailto:cora@hollyispretty.com">📧 EMAIL ME!! 📧</a>
     </div>
     
     <!-- Under construction -->
@@ -333,20 +338,27 @@
         createLights('lights-left', vLights, true);
         createLights('lights-right', vLights, true);
         
-        // Flying image (DVD screensaver style)
+        // Flying images (DVD screensaver style)
         const img = document.getElementById('flying-image');
+        const img2 = document.getElementById('flying-image-2');
+        
         let x = Math.random() * (window.innerWidth - 150);
         let y = Math.random() * (window.innerHeight - 150);
         let dx = 3;
         let dy = 2;
         
+        let x2 = Math.random() * (window.innerWidth - 150);
+        let y2 = Math.random() * (window.innerHeight - 150);
+        let dx2 = -2.5;
+        let dy2 = 3.5;
+        
         function animateImage() {
+            // Animate Cora
             x += dx;
             y += dy;
             
             if (x <= 0 || x >= window.innerWidth - 150) {
                 dx = -dx;
-                // Random speed change on bounce
                 dx = dx > 0 ? Math.random() * 3 + 2 : -(Math.random() * 3 + 2);
             }
             if (y <= 0 || y >= window.innerHeight - 150) {
@@ -356,6 +368,22 @@
             
             img.style.left = x + 'px';
             img.style.top = y + 'px';
+            
+            // Animate Holly
+            x2 += dx2;
+            y2 += dy2;
+            
+            if (x2 <= 0 || x2 >= window.innerWidth - 150) {
+                dx2 = -dx2;
+                dx2 = dx2 > 0 ? Math.random() * 3 + 2 : -(Math.random() * 3 + 2);
+            }
+            if (y2 <= 0 || y2 >= window.innerHeight - 150) {
+                dy2 = -dy2;
+                dy2 = dy2 > 0 ? Math.random() * 3 + 2 : -(Math.random() * 3 + 2);
+            }
+            
+            img2.style.left = x2 + 'px';
+            img2.style.top = y2 + 'px';
             
             requestAnimationFrame(animateImage);
         }
